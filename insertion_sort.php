@@ -1,11 +1,29 @@
 <?php 
 
+class algoStats {
+    public $arr;
+    public $nComp;
+    public $nIter;
+    public $count;
+    public $tStart;
+
+    public function init($arg) {
+        $this->arr = explode(";", $arg);
+        $this->count = count($this->arr);
+        $this->tStart = microtime(true);
+        $this->nComp = 0;
+        $this->nIter = 0;
+        return $this;
+    }
+}
+
 class utils {
-    function printArr($src, $n) {
+    function printArr($as) {
+        $src = $as->arr;
         $out = "";
-        for ($i = 0; $i < $n; $i++) {
+        for ($i = 0; $i < $as->count; $i++) {
             $out .= $src[$i];
-            if ($i + 1 != $n)
+            if ($i + 1 != $as->count)
             $out .= ";";
         }
         return $out;
@@ -16,25 +34,29 @@ class utils {
     }
 }
 
-function _sort($in, $n) {
-    for ($i = 1; $i < $n; $i++) {
-        $ky = $in[$i];
+function _sort($in) {
+    for ($i = 1; $i < $in->count; $i++) {
+        $ky = $in->arr[$i];
         $j = $i - 1;
-        while ($j >= 0 && $in[$j] > $ky) {
-            $in[$j + 1] = $in[$j];
+        while ($j >= 0 && $in->arr[$j] > $ky) {
+            $in->arr[$j + 1] = $in->arr[$j];
             $j = $j - 1;
+            $in->nComp += $i;
         }
-        $in[$j + 1] = $ky;
+        $in->nIter += $i;
+        $in->arr[$j + 1] = $ky;
     }
     return $in;
 }
 
 function run($args) {
-    $tStart = microtime(true); 
-    $src = explode(";", $args[1]);
-    $n = count($src);
-    print("Série : " . utils::printArr($src, $n));
-    print("\nRésultat : " . utils::printArr(_sort($src, $n), $n));
+    $as = new algoStats();
+    $tStart = microtime(true);
+    $as->init($args[1]);
+    print("Série : " . utils::printArr($as));
+    print("\nRésultat : " . utils::printArr(_sort($as)));
+    print("\nNb de comparaison : " . $as->nComp);
+    print("\nNb d'itération : " . $as->nIter);
     print("\nTemps (sec) : " . number_format((microtime(true) - $tStart), 2) . "\n");
 }
 
