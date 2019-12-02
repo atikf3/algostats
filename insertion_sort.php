@@ -51,13 +51,12 @@ function _sort($in) {
 
 function run($args) {
     $as = new algoStats();
-    $tStart = microtime(true);
     $as->init($args[1]);
     print("Série : " . utils::printArr($as));
     print("\nRésultat : " . utils::printArr(_sort($as)));
     print("\nNb de comparaison : " . $as->nComp);
     print("\nNb d'itération : " . $as->nIter);
-    print("\nTemps (sec) : " . number_format((microtime(true) - $tStart), 2) . "\n");
+    print("\nTemps (sec) : " . number_format((microtime(true) - $as->tStart), 2) . "\n");
 }
 
 if ($argv[1] != null) {
