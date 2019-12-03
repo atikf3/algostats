@@ -37,14 +37,18 @@ class utils {
 function _sort($in) {
     $my_array = $in->arr;
     $taille = $in->count;
-    for ($i = 0; $i < $taille; $i++) {
-        $tmp = $my_array[$i];
-        $pos = $i;
-        while ($pos > 0 && $my_array[$pos - 1] > $tmp) {
-            $my_array[$pos] = $my_array[$pos - 1];
-            $pos = $pos - 1;
+    for ($i = 0; $i < $taille - 1; $i++) {
+        $min = $i;
+        for ($j = $i + 1; $j < $taille; $j++) {
+            if ($my_array[$j] < $my_array[$min]) {
+                $min = $j;
+            }
         }
-        $my_array[$pos] = $tmp;
+        if ($min != $i) {
+            $tmp = $my_array[$min];
+            $my_array[$min] = $my_array[$i];
+            $my_array[$i] = $tmp;
+        }
     }
     $in->arr = $my_array;
     return $in;
