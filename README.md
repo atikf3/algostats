@@ -13,7 +13,7 @@
 
 ## Explications
 ### Insert Sort:
-> Le tri par insertion est essentiellement ce qu'on faite intuitivement lorsque on trie une pile de documents ou de dossiers. On prend la pile et on la traverse ; lorsque on trouve quelque chose en "désordre", on la met au bon endroit.
+> Le tri par insertion est essentiellement ce qu'on fait intuitivement lorsque on trie une pile de documents ou de dossiers. On prend la pile et on la traverse ; lorsque on trouve quelque chose en "désordre", on le met au bon endroit.
 
 ## Additional Data
 **Contributors:**
