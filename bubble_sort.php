@@ -43,14 +43,14 @@ function _sort($in) {
     while ($is_sort == false ) {
         $is_sort = true;
         for ($i = 0; $i < $taille - 1; $i++) {
-        $iter++;
+            $iter++;
             if ($my_array[$i] > $my_array[$i + 1]) {
                 $tmp = $my_array[$i + 1];
                 $my_array[$i + 1] = $my_array[$i];
                 $my_array[$i] = $tmp;
                 $is_sort = false;
-                $nComp++;
             }
+            $nComp++;
         }
         $taille = $taille - 1;
     }
