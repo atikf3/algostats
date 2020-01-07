@@ -56,7 +56,7 @@ function _sort($in) {
         }
     }
     $in->nIter = $iter;
-    $in->nComp = $nComp + $iter + 1;
+    $in->nComp = $in->count * $in->count;
     $in->arr = $my_array;
     return $in;
 }
