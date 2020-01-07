@@ -41,22 +41,22 @@ function _sort($in) {
     $nComp = 0;
     for ($i = 0; $i < $taille - 1; $i++) {
         $min = $i;
+        $nComp++;
         for ($j = $i + 1; $j < $taille; $j++) {
             $iter++;
             if ($my_array[$j] < $my_array[$min]) {
                 $min = $j;
-                $nComp++;
             }
+            $nComp++;
         }
         if ($min != $i) {
             $tmp = $my_array[$min];
             $my_array[$min] = $my_array[$i];
             $my_array[$i] = $tmp;
-            $nComp++;
         }
     }
     $in->nIter = $iter;
-    $in->nComp = $nComp;
+    $in->nComp = $nComp + $iter + 1;
     $in->arr = $my_array;
     return $in;
 }
