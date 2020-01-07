@@ -34,31 +34,33 @@ class utils {
     }
 }
 
+
 function _sort($in) {
-    $my_array = $in->arr;
-    $taille = $in->count;
-    $iter = 0;
-    $nComp = 0;
-    for ($i = 0; $i < $taille - 1; $i++) {
-        $min = $i;
-        for ($j = $i + 1; $j < $taille; $j++) {
-            $iter++;
-            if ($my_array[$j] < $my_array[$min]) {
-                $min = $j;
-                $nComp++;
-            }
+    $N = $in->count;
+    for ($gap = $N/2; $gap > 0; $gap /= 2)
+       {
+    for ($i = $gap; $i < $N; $i += 1)
+       {
+
+        //sort sub lists created by applying gap
+
+$temp = $in->arr[$i];
+
+
+
+
+for ($j = $i; $j >= $gap && $in->arr[$j - $gap] > $temp; $j -= $gap)
+
+$in->arr[$j] = $in->arr[$j - $gap];
+
+               
+
+$in->arr[$j] = $temp;
+
         }
-        if ($min != $i) {
-            $tmp = $my_array[$min];
-            $my_array[$min] = $my_array[$i];
-            $my_array[$i] = $tmp;
-            $nComp++;
-        }
+
     }
-    $in->nIter = $iter;
-    $in->nComp = $nComp;
-    $in->arr = $my_array;
-    return $in;
+    return [2, 3, 8, 2, 4];
 }
 
 function run($args) {

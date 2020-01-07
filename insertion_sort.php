@@ -38,6 +38,7 @@ function _sort($in) {
     $my_array = $in->arr;
     $taille = $in->count;
     $i = $j = 0;
+    $iter = 0;
     for ($i; $i < $taille; $i++) {
         $tmp = $my_array[$i];
         $pos = $i;
@@ -45,11 +46,13 @@ function _sort($in) {
             $my_array[$pos] = $my_array[$pos - 1];
             $pos = $pos - 1;
             $j++;
+            $iter++;
         }
         $my_array[$pos] = $tmp;
     }
-    $in->nIter = $j;
-    $in->nComp = $i + ($j * 2);
+    
+    $in->nIter = $iter;
+    $in->nComp = $iter;
     $in->arr = $my_array;
     return $in;
 }
