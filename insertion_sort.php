@@ -18,7 +18,7 @@ class algoStats {
 }
 
 class utils {
-    function printArr($as) {
+    static function printArr($as) {
         $src = $as->arr;
         $out = "";
         for ($i = 0; $i < $as->count; $i++) {
@@ -29,7 +29,7 @@ class utils {
         return $out;
     }
     
-    function noArg() {
+    static function noArg() {
         return "\nERROR: No arguments!\n";
     }
 }
@@ -38,21 +38,18 @@ function _sort($in) {
     $my_array = $in->arr;
     $taille = $in->count;
     $i = $j = 0;
-    $iter = 0;
     for ($i; $i < $taille; $i++) {
         $tmp = $my_array[$i];
         $pos = $i;
+        $in->nComp++;
         while ($pos > 0 && $my_array[$pos - 1] > $tmp) {
             $my_array[$pos] = $my_array[$pos - 1];
             $pos = $pos - 1;
-            $j++;
-            $iter++;
+            $in->nComp++;
         }
         $my_array[$pos] = $tmp;
     }
-    
-    $in->nIter = $iter;
-    $in->nComp = $iter;
+    $in->nIter += $i;
     $in->arr = $my_array;
     return $in;
 }
