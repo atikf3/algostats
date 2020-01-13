@@ -36,31 +36,23 @@ class utils {
 
 
 function _sort($in) {
-    $N = $in->count;
-    for ($gap = $N/2; $gap > 0; $gap /= 2)
-       {
-    for ($i = $gap; $i < $N; $i += 1)
-       {
-
-        //sort sub lists created by applying gap
-
-$temp = $in->arr[$i];
-
-
-
-
-for ($j = $i; $j >= $gap && $in->arr[$j - $gap] > $temp; $j -= $gap)
-
-$in->arr[$j] = $in->arr[$j - $gap];
-
-               
-
-$in->arr[$j] = $temp;
-
+    $gap = round($in->count / 2);
+    while ($gap > 0) {
+        for ($i = $gap; $i < $in->count; $i++) {
+            $tmp = $in->arr[$i];
+            $j = $i;
+            $in->nComp++;
+            $in->nIter++;
+            while ($in->arr[$j - $gap] > $tmp && $j >= $gap) {
+                $in->nComp++;
+                $in->arr[$j] = $in->arr[$j - $gap];
+                $j -= $gap;
+            }
+            $in->arr[$j] = $tmp;
         }
-
+        $gap = round($gap / 2.2);
     }
-    return [2, 3, 8, 2, 4];
+    return $in;
 }
 
 function run($args) {
